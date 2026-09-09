@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/product/order',[ProductController::class, 'createOrder']);
     Route::prefix('/view')->group( function () {
         Route::get('/order-list',[UserController::class,'getOrdered']);
-        Route::patch('{order}/status', [UserController::class, 'editStatus']);
+        Route::patch('/{order}/status', [UserController::class, 'editStatus']);
     });
 });

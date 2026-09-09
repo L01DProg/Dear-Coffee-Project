@@ -86,7 +86,7 @@ class UserController extends Controller
             ], 401);
         }
 
-        $order = Order::latest()->get();
+        $order = Order::orderBy('id', 'asc')->get();
 
         if (!$order) {
             return response()->json([
@@ -105,7 +105,7 @@ class UserController extends Controller
 
         $userAuth = auth()->user();
 
-        if ($userAuth !== 'Admin' && $userAuth !== 'Cashier') {
+        if ($userAuth->role !== 'Admin' && $userAuth->role !== 'Cashier') {
             return response()->json([
                 'message' => 'Unauthorized only Admin and Cashier can change status'
             ], 401);
@@ -121,9 +121,9 @@ class UserController extends Controller
 
         try {
             $request->validate([
-                'status' => 'required|in:preparing,done'
+                'status' => 'required|in:new,preparing,ready,completed'
             ]);
-
+            
             $customerOrder->update($request->only('status'));
 
             return response()->json([

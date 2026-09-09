@@ -2,6 +2,7 @@ import { useState } from "react";
 import BackgroundImage from "../assets/photo.avif";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -40,12 +41,14 @@ export default function Login() {
       }
 
       localStorage.setItem("token", data.token);
-
+      let roles = role;
       setUsername("");
       setPassword("");
       setRole("");
 
-      navigate('/kitchen');
+      if (roles === "Cashier") {
+        navigate("/kitchen");
+      }
     } catch (err) {
       console.error(err);
       setMessage("Unable to connect to the server.");
@@ -276,6 +279,7 @@ export default function Login() {
                       onChange={(e) => setRole(e.target.value)}
                       required
                     >
+                      <option value="">Position</option>
                       <option value="Admin">Administrator</option>
 
                       <option value="Cashier">Cashier</option>
@@ -338,6 +342,7 @@ export default function Login() {
                     w-100
                     text-white
                     fw-semibold
+                    mb-2
                   "
                   disabled={loading}
                   style={{
@@ -351,7 +356,7 @@ export default function Login() {
                         className="
                           spinner-border
                           spinner-border-sm
-                          me-2
+                          
                         "
                         role="status"
                       ></span>
