@@ -1,7 +1,8 @@
 import { useState } from "react";
 import BackgroundImage from "../assets/photo.avif";
 import { useNavigate } from "react-router-dom";
-
+import { authentication } from "../function/Authentication";
+import RegisterButton from "../components/RegisterButton";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -12,50 +13,6 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
-  const authentication = async (e) => {
-    e.preventDefault();
-
-    setMessage("");
-    setLoading(true);
-
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-          role,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setMessage(data.message || "Incorrect credentials");
-        return;
-      }
-
-      localStorage.setItem("token", data.token);
-      let roles = role;
-      setUsername("");
-      setPassword("");
-      setRole("");
-
-      if (roles === "Cashier") {
-        navigate("/kitchen");
-      }
-    } catch (err) {
-      console.error(err);
-      setMessage("Unable to connect to the server.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div
@@ -224,7 +181,22 @@ export default function Login() {
                 Sign in to your admin account
               </p>
 
-              <form onSubmit={authentication}>
+              <form
+                onSubmit={(e) =>
+                  authentication(
+                    e,
+                    username,
+                    password,
+                    role,
+                    setMessage,
+                    setLoading,
+                    setUsername,
+                    setPassword,
+                    setRole,
+                    navigate
+                  )
+                }
+              >
                 <div className="mb-3">
                   <label className="form-label fw-semibold">Username</label>
 
@@ -366,6 +338,7 @@ export default function Login() {
                     <>→ &nbsp; Sign In</>
                   )}
                 </button>
+                <RegisterButton />
               </form>
 
               <div

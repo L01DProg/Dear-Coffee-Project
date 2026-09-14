@@ -13,24 +13,16 @@ class UserController extends Controller
 {
     public function Register(Request $request)
     {
-        $Authenticate = auth()->user();
-
-        if (!$Authenticate || $Authenticate->role !== 'Admin') {
-            return response()->json([
-                'message' => 'Unauthorized Only Admin can register users',
-            ], 403);
-        }
-
         $validatedData = $request->validate([
             'username' => 'required|string|max:25',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'role' => 'string'
+
         ]);
 
 
-
         $validatedData['password'] = Hash::make($validatedData['password']);
+        $validatedData['role'] = 'Customer';
 
         $user = User::create($validatedData);
 
@@ -123,7 +115,7 @@ class UserController extends Controller
             $request->validate([
                 'status' => 'required|in:new,preparing,ready,completed'
             ]);
-            
+
             $customerOrder->update($request->only('status'));
 
             return response()->json([
