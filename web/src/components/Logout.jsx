@@ -1,8 +1,4 @@
-import { useNavigate } from "react-router-dom";
-
-export default function Logout() {
-  const navigate = useNavigate();
-
+export default function Logout({ navigate }) {
   const handleLogout = async () => {
     const token = localStorage.getItem("token");
 
@@ -23,11 +19,7 @@ export default function Logout() {
   };
 
   return (
-    <button
-      type="button"
-      className="btn btn-danger"
-      onClick={handleLogout}
-    >
+    <button type="button" className="btn bg-dark text-white" onClick={handleLogout}>
       <i className="bi bi-box-arrow-right me-2"></i>
       Logout
     </button>

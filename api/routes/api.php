@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::post('/login', [UserController::class, 'Login']);
     Route::post('/register',[UserController::class,'Register']);
+    Route::post('/admin-pin',[UserController::class, 'authenticateAdminPin']);
 });
 
 

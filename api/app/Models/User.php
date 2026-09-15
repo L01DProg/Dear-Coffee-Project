@@ -48,4 +48,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function pinNumber() {
+        return $this->hasOne(PinNumber::class, 'user_id');
+    }
 }

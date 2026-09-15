@@ -8,10 +8,13 @@ import {
   changeStatus,
 } from "../function/ChangeStatus";
 import Logout from "../components/Logout";
+import { useNavigate } from "react-router-dom";
 
 export default function Kitchen() {
   const [orders, setOrders] = useState([]);
   const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const viewOrder = async () => {
     try {
@@ -79,7 +82,7 @@ export default function Kitchen() {
               <h3 className="fw-bold m-0">Kitchen Display</h3>
               <small className="text-muted">Manage incoming orders</small>
             </div>
-            <Logout />
+            <Logout navigate={navigate} />
           </div>
         </div>
 
@@ -118,7 +121,6 @@ export default function Kitchen() {
             </div>
           </div>
 
-         
           <div className="col-lg-4">
             <div className="bg-white rounded-4 shadow-sm p-4 h-100 kitchen-column">
               <div className="d-flex justify-content-between mb-3">
@@ -149,7 +151,6 @@ export default function Kitchen() {
             </div>
           </div>
 
-          
           <div className="col-lg-4">
             <div className="bg-white rounded-4 shadow-sm p-4 h-100 kitchen-column">
               <div className="d-flex justify-content-between mb-3">

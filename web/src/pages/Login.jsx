@@ -252,9 +252,8 @@ export default function Login() {
                       required
                     >
                       <option value="">Position</option>
-                      <option value="Admin">Administrator</option>
-
-                      <option value="Cashier">Cashier</option>
+                      <option value="Cashier">Employee</option>
+                      <option value="Customer">Customer</option>
                     </select>
                   </div>
                 </div>
@@ -338,7 +337,7 @@ export default function Login() {
                     <>→ &nbsp; Sign In</>
                   )}
                 </button>
-                <RegisterButton />
+                <RegisterButton navigate={navigate} />
               </form>
 
               <div
@@ -368,6 +367,7 @@ export default function Login() {
                   color: "#75421f",
                   borderColor: "#d7c8ba",
                 }}
+                onClick={() => navigate("/admin-pin")}
               >
                 🛡️ &nbsp; Sign in with Admin PIN
               </button>

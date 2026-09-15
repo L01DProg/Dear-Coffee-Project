@@ -1,0 +1,68 @@
+const products = [
+  {
+    id: 1,
+    name: "Caramel Latte",
+    category: "Coffee",
+    description: "Smooth espresso with steamed milk and caramel.",
+    price: 120,
+    image: "https://images.unsplash.com/photo-1561047029-3000c68339ca",
+  },
+  {
+    id: 2,
+    name: "Cappuccino",
+    category: "Coffee",
+    description: "Rich espresso topped with creamy milk foam.",
+    price: 110,
+    image: "https://images.unsplash.com/photo-1572449043416-55f4685c9bb7",
+  },
+  {
+    id: 3,
+    name: "Iced Americano",
+    category: "Iced",
+    description: "Bold espresso served over ice.",
+    price: 100,
+    image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c",
+  },
+  {
+    id: 4,
+    name: "Mocha",
+    category: "Coffee",
+    description: "Espresso blended with chocolate and steamed milk.",
+    price: 125,
+    image: "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e",
+  },
+  {
+    id: 5,
+    name: "Iced Caramel Macchiato",
+    category: "Iced",
+    description: "Cold milk, espresso and caramel drizzle.",
+    price: 135,
+    image: "https://images.unsplash.com/photo-1485808191679-5f86510681a2",
+  },
+  {
+    id: 6,
+    name: "Chocolate Cake",
+    category: "Pastry",
+    description: "Moist chocolate cake with rich chocolate frosting.",
+    price: 95,
+    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587",
+  },
+  {
+    id: 7,
+    name: "Croissant",
+    category: "Pastry",
+    description: "Fresh and buttery French-style croissant.",
+    price: 75,
+    image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a",
+  },
+  {
+    id: 8,
+    name: "Strawberry Frappe",
+    category: "Frappe",
+    description: "Creamy strawberry blended drink topped with cream.",
+    price: 145,
+    image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699",
+  },
+];
+
+export default products;

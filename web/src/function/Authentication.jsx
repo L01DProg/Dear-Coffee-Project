@@ -46,6 +46,8 @@ export const authentication = async (
 
     if (roles === "Cashier") {
       navigate("/kitchen");
+    } else if (roles === "Customer") {
+      navigate("/menu");
     }
   } catch (err) {
     console.error(err);

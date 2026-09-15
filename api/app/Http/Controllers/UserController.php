@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\PinNumber;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,41 @@ use function Laravel\Prompts\error;
 
 class UserController extends Controller
 {
+
+    public function authenticateAdminPin(Request $request)
+    {
+        $request->validate([
+            'pin_number' => 'required|digits:4',
+        ]);
+
+        $adminPin = PinNumber::where('pin_number', $request->pin_number)
+            ->whereHas('user', function ($query) {
+                $query->where('role', 'Admin');
+            })
+            ->with('user')
+            ->first();
+
+        if (!$adminPin) {
+            return response()->json([
+                'message' => 'Incorrect Pin Number'
+            ], 403);
+        }
+
+        $admin = $adminPin->user;
+
+        $token = $admin->createToken('admin-auth-token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Successful Login with PIN',
+            'token' => $token,
+            'user' => [
+                'id' => $admin->id,
+                'username' => $admin->username,
+                'role' => $admin->role,
+            ],
+        ], 200);
+    }
+
     public function Register(Request $request)
     {
         $validatedData = $request->validate([
